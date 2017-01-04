@@ -385,7 +385,7 @@ def parse(String description) {
 def zwaveEvent(physicalgraph.zwave.commands.sceneactivationv1.SceneActivationSet cmd) {
 	log.debug( "Scene ID: $cmd.sceneId")
 
-    sendEvent(name: "scene", value: "$cmd.sceneId", data: [switchType: "$settings.param28"], descriptionText: "Scene id $cmd.sceneId was activated", isStateChange: true)
+    sendEvent(name: "scene", value: "$cmd.sceneId", data: [switchType: "$settings.param20"], descriptionText: "Scene id $cmd.sceneId was activated", isStateChange: true)
     log.debug( "Scene id $cmd.sceneId was activated" )
 }
 
