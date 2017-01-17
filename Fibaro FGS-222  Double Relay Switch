@@ -1,5 +1,5 @@
 /**
- *  Fibaro Relay Switch 2x1,5kW
+ *  Fibaro Double Relay Switcb
  *
  *  Copyright 2017 Robin Winbourne
  * 
@@ -29,7 +29,7 @@
  *
  */
 metadata {
-	definition (name: "Fibaro FGS-222 Dual Relay Switch (2x1,5kW)", namespace: "smartthings", author: "Robin Winbourne") {
+	definition (name: "Fibaro FGS-222 Double Relay Switch", namespace: "smartthings", author: "Robin Winbourne") {
 		capability "Polling"
 		capability "Relay Switch"
         capability "Configuration"
@@ -76,7 +76,7 @@ metadata {
         
     }
     preferences {
-        def paragraph = "GROUP 0 - Fibaro Relay Switch 2x1.5kW - Basic functionalities"
+        def paragraph = "GROUP 0 - Fibaro Double Relay Switc - Parameter Settings"
        
         input name: "param1", type: "enum", defaultValue: "255", required: true,
             options: ["255" : "255",
