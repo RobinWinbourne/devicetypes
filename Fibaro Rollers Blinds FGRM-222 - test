@@ -90,7 +90,7 @@ standardTile("forcecalibration", "device.switch", inactiveLabel: false, decorati
                 }
 
 
-    details(["open", "stop", "close", "levelSliderControl", "refresh", "configure", "motortime18", "motortime240", "forcecalibration"])
+    details(["open", "stop", "close", "levelSliderControl", "refresh", "configure"])
 }
 
  preferences {
@@ -102,7 +102,34 @@ standardTile("forcecalibration", "device.switch", inactiveLabel: false, decorati
                    "0 - The function is disabled\n" +
                    "1 – 65535 (1 – 65535s)\n" +
                    "Default value: 240 (240s - 4 minutes)."
-  }
+
+        input name: "param10", type: "number", range: "0..4", defaultValue: "1", required: true,
+            title: "10. Roller Shutter operating mode " +
+                  "Available settings:\n" +
+                   "0 - Roller Blind Mode, without positioning,\n" +
+                   "1 - Roller Blind Mode, with positioning,\n" +
+                   "2 - Venetian Blind Mode, with positioning,\n" +
+                   "3 - Gate Mode, without positioning,\n" +
+                   "4 - Gate Mode, with positioning,\n" +
+                   "Default value: 1."
+		   
+
+        input name: "param18", type: "number", range: "0..255", defaultValue: "1", required: true,
+            title: "18. Motor operation detection. " +
+                   "Power threshold to be interpreted as reaching a limit switch.  \n" +
+                  "Available settings:\n" +
+                   "0 - 255 (1-255 W).\n" +
+                   "Default value: 10."
+		   
+	input name: "param29", type: "number", range: "0..1", defaultValue: "0", required: true,
+            title: "29. Forced Roller Shutter calibration. " +
+                   "By modifying the parameters setting from 0 to 1 a Roller Shutter enters the calibration mode. The parameter relevant only if a Roller Shutter is set to work in positioning mode (parameter 10 set to 1, 2 or 4).  \n" +
+                  "Available settings:\n" +
+                   "1 - Start calibration process. \n" +
+                   "Default value: 0."   
+}
+
+
 
 def parse(String description) {
 log.debug "Parsing '${description}'"
@@ -237,9 +264,12 @@ log.debug "Updating ${device.displayName} parameter number '${pNumber}' with val
 def configure() {
 	log.debug "Executing 'configure'"
     delayBetween([
-          zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: param22.toInteger()),
+        //  zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: param22.toInteger()),
          // zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, configurationValue:[param22.value]).format(),
          zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, configurationValue:[param22.value]).format(),
+	 zwave.configurationV1.configurationSet(parameterNumber: 10, size: 1, configurationValue:[param10.value]).format(),
+	 zwave.configurationV1.configurationSet(parameterNumber: 18, size: 1, configurationValue:[param18.value]).format(),
+	 zwave.configurationV1.configurationSet(parameterNumber: 29, size: 1, configurationValue:[param29.value]).format(),
 	 zwave.associationV2.associationSet(groupingIdentifier:1, nodeId:[zwaveHubNodeId]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:2, nodeId:[zwaveHubNodeId]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:3, nodeId:[zwaveHubNodeId]).format(),
