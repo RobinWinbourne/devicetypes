@@ -263,7 +263,8 @@ def motortime240() {
 def forcecalibration() {
 	log.debug "Executing 'Force Calibration'"
     delayBetween([
-          zwave.configurationV1.configurationSet(parameterNumber: 29, size: 1, scaledConfigurationValue: 1),
+       //   zwave.configurationV1.configurationSet(parameterNumber: 29, size: 1, scaledConfigurationValue: [1]).format(),
+	  zwave.configurationV1.configurationSet(parameterNumber: 29, size: 1, configurationValue:[1]).format(),
     ])
 }
 
