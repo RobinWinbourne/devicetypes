@@ -53,6 +53,7 @@ capability "Polling"
   command "configure"
   command "motortime18"
   command "motortime240"
+  command "forcecalibration"
 
 
 }
@@ -84,10 +85,12 @@ state "level", action:"setposition"
                     standardTile("motortime240", "device.switch", inactiveLabel: false, decoration: "flat") {
         				state "default", label:"240", action:"motortime240"//, icon:"st.secondary.configure"
                 }
+standardTile("forcecalibration", "device.switch", inactiveLabel: false, decoration: "flat") {
+        				state "default", label:"Force Calibration", action:"forcecalibration"//, icon:"st.secondary.configure"
+                }
 
 
-
-    details(["open", "stop", "close", "levelSliderControl", "refresh", "configure", "motortime18", "motortime240"])
+    details(["open", "stop", "close", "levelSliderControl", "refresh", "configure", "motortime18", "motortime240", "forcecalibration"])
 }
 
  preferences {
@@ -234,8 +237,8 @@ log.debug "Updating ${device.displayName} parameter number '${pNumber}' with val
 def configure() {
 	log.debug "Executing 'configure'"
     delayBetween([
-       //   zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: param22.toInteger()),
-          zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, configurationValue:[param22.value]).format(),
+          zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: param22.toInteger()),
+         // zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, configurationValue:[param22.value]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:1, nodeId:[zwaveHubNodeId]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:2, nodeId:[zwaveHubNodeId]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:3, nodeId:[zwaveHubNodeId]).format(),
@@ -254,6 +257,13 @@ def motortime240() {
 	log.debug "Executing 'Motor Time 240'"
     delayBetween([
           zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: 240),
+    ])
+}
+
+def forcecalibration() {
+	log.debug "Executing 'Force Calibration'"
+    delayBetween([
+          zwave.configurationV1.configurationSet(parameterNumber: 29, size: 1, scaledConfigurationValue: 1),
     ])
 }
 
