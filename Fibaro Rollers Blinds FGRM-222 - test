@@ -75,14 +75,19 @@ state "level", action:"setposition"
     standardTile("refresh", "device.switch", inactiveLabel: false, decoration: "flat") {
         state "default", label:'', action:"refresh.refresh", icon:"st.secondary.refresh"
     }
-    standardTile("configure", "device.switch2", inactiveLabel: false, decoration: "flat") {
+    standardTile("configure", "device.switch", inactiveLabel: false, decoration: "flat") {
         				state "default", label:"", action:"configure", icon:"st.secondary.configure"
                 }
-        
+            standardTile("motortime18", "device.switch", inactiveLabel: false, decoration: "flat") {
+        				state "default", label:"18", action:"motortime18"//, icon:"st.secondary.configure"
+                }
+                    standardTile("motortime240", "device.switch", inactiveLabel: false, decoration: "flat") {
+        				state "default", label:"240", action:"motortime240"//, icon:"st.secondary.configure"
+                }
 
 
 
-    details(["open", "stop", "close", "levelSliderControl", "refresh", "configure"])
+    details(["open", "stop", "close", "levelSliderControl", "refresh", "configure", "motortime18", "motortime240"])
 }
 
  preferences {
