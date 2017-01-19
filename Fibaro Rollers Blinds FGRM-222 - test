@@ -234,8 +234,8 @@ log.debug "Updating ${device.displayName} parameter number '${pNumber}' with val
 def configure() {
 	log.debug "Executing 'configure'"
     delayBetween([
-          zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: param22.toInteger()),
-         // zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, configurationValue:[param22.value]).format(),
+       //   zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, scaledConfigurationValue: param22.toInteger()),
+          zwave.configurationV1.configurationSet(parameterNumber: 22, size: 2, configurationValue:[param22.value]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:1, nodeId:[zwaveHubNodeId]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:2, nodeId:[zwaveHubNodeId]).format(),
           zwave.associationV2.associationSet(groupingIdentifier:3, nodeId:[zwaveHubNodeId]).format(),
