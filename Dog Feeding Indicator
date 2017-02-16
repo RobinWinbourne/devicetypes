@@ -66,6 +66,6 @@ def breakfast() {
     sendEvent(name: "door", value: "opening")
 }
 
-def Dinner() {
+def dinner() {
     sendEvent(name: "door", value: "closing")
 }
