@@ -34,7 +34,7 @@ metadata {
 			state "default", label:"Not Hungry", action:"not_hungry", icon:"st.Health & Wellness.health8"
 		}
         standardTile("hungry", "device.door", inactiveLabel: false, decoration: "flat") {
-			state "default", label:"Not Hungry", action:"hungry", icon:"st.Food & Dining.dining1"
+			state "default", label:"Hungry", action:"hungry", icon:"st.Food & Dining.dining1"
 		}
 
 		main "toggle"
