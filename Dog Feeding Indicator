@@ -1,0 +1,71 @@
+metadata {
+	definition (name: "Dog Feeding Indicator", namespace: "smartthings", author: "Robin Winbourne") {
+		capability "Actuator"
+		capability "Door Control"
+    capability "Garage Door Control"
+		capability "Refresh"
+		capability "Sensor"
+        
+        command "hungry"
+        command "not_hungry"
+        command "breakfast"
+        command "dinner"
+	}
+
+	simulator {
+		
+	}
+
+	tiles {
+		standardTile("toggle", "device.door", inactiveLabel: true, width: 3, height: 3) {
+			state("closed", label:"Hungry", action:"door control.open", icon:"st.Food & Dining.dining1", backgroundColor:"#FC030F")
+			state("open", label:"Not Hungry", action:"door control.close", icon:"st.Health & Wellness.health8", backgroundColor:"#8CFC03")
+			state("opening", label:"Breakfast", icon:"st.Office.office6", backgroundColor:"#07F7D7")
+			state("closing", label:"Dinner", icon:"st.Food & Dining.dining13", backgroundColor:"#5F07F7")
+			
+		}
+		standardTile("open", "device.door", inactiveLabel: false, decoration: "flat") {
+			state "default", label:"Breakfast", action:"door control.open", icon:"st.Office.office6"
+		}
+		standardTile("close", "device.door", inactiveLabel: false, decoration: "flat") {
+			state "default", label:"Dinner", action:"door control.close", icon:"st.Food & Dining.dining13"
+		}
+        standardTile("nothungry", "device.door", inactiveLabel: false, decoration: "flat") {
+			state "default", label:"Not Hungry", action:"not_hungry", icon:"st.Health & Wellness.health8"
+		}
+        standardTile("hungry", "device.door", inactiveLabel: false, decoration: "flat") {
+			state "default", label:"Not Hungry", action:"hungry", icon:"st.Food & Dining.dining1"
+		}
+
+		main "toggle"
+		details(["toggle", "open", "close", "hungry", "nothungry"])
+	}
+}
+
+def parse(String description) {
+	log.trace "parse($description)"
+}
+
+def open() {
+	sendEvent(name: "door", value: "opening")
+}
+
+def close() {
+    sendEvent(name: "door", value: "closing")
+}
+
+def hungry() {
+    sendEvent(name: "door", value: "closed")
+}
+
+def not_hungry() {
+    sendEvent(name: "door", value: "open")
+}
+
+def breakfast() {
+    sendEvent(name: "door", value: "opening")
+}
+
+def Dinner() {
+    sendEvent(name: "door", value: "closing")
+}
