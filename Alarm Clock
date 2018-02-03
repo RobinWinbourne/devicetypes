@@ -102,42 +102,49 @@ metadata {
 }
 def Monday_On(){
  sendEvent(name:"Monday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Monday_Off(){
  sendEvent(name:"Monday",value:"off")
  } 
 def Tuesday_On(){
  sendEvent(name:"Tuesday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Tuesday_Off(){
  sendEvent(name:"Tuesday",value:"off")
  } 
 def Wednesday_On(){
  sendEvent(name:"Wednesday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Wednesday_Off(){
  sendEvent(name:"Wednesday",value:"off")
  } 
 def Thursday_On(){
  sendEvent(name:"Thursday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Thursday_Off(){
  sendEvent(name:"Thursday",value:"off")
  } 
 def Friday_On(){
  sendEvent(name:"Friday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Friday_Off(){
  sendEvent(name:"Friday",value:"off")
  } 
 def Saturday_On(){
  sendEvent(name:"Saturday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Saturday_Off(){
  sendEvent(name:"Saturday",value:"off")
  } 
 def Sunday_On(){
  sendEvent(name:"Sunday",value:"on")
+ sendEvent(name:"switch",value:"on")
  }
  def Sunday_Off(){
  sendEvent(name:"Sunday",value:"off")
