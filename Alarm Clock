@@ -1,0 +1,53 @@
+metadata {
+ 	definition (name: "Alarm Clock", namespace: "Alarm", author: "Robin Winbourne") {
+ 		capability "Actuator"
+ 		capability "Switch"
+ 		capability "Sensor"
+    attribute "alarm","string"
+    command "changeAlarmTime"
+     }
+     preferences {
+     input name: "timer", type: "time", title: "Alarm Time", description: "Enter Time", required: false
+ 	}
+
+ 	// UI tile definitions
+ 	tiles {
+ 		multiAttributeTile(name:"switch", type: "generic", width: 6, height: 4, canChangeIcon: true, canChangeBackground: false){
+			tileAttribute ("device.switch", key: "PRIMARY_CONTROL") {
+ 			attributeState "off", label: 'off', action: "switch.on", icon: "st.Health & Wellness.health7", backgroundColor: "#ffffff"
+ 			attributeState "on", label: 'on', action: "switch.off", icon: "st.Health & Wellness.health7", backgroundColor: "#00A0DC"
+ 		}
+        }
+ 		valueTile("alarm", "device.alarm", width: 6, height: 3) {
+ 			state "default", label:'${currentValue}',backgroundColor: "#00A0DC"
+ 		}
+ 		main(["switch","alarm"])
+ 		details(["switch","alarm"])
+ 	}
+ }
+ def parse() {
+ }
+ def updated() {
+        def time = timer.substring(11,16)
+         def tz = location.timeZone
+ 		def schedTime = time //Today(timer, tz)
+ 		//def ntime = schedTime.format("H",tz)
+ 		//def min = schedTime.format("m",tz)
+         //def newtime = schedTime.format('HH:mm:ss', tz).toString()
+     if(timer) {
+     		log.debug "Alarm time set to: $timer"
+             sendEvent("name":"image", "value":schedTime)
+             sendEvent("name":"alarm", "value":time)
+     } else {
+     		log.debug "No departure time is set"
+     		}
+ }
+ def on(){
+ sendEvent(name:"switch",value:"on")
+ }
+ def off(){
+ sendEvent(name:"switch",value:"off")
+ } 
+ def changeAlarmTime(paramTime) {
+    sendEvent("name":"alarm", "value":paramTime)
+}
