@@ -15,19 +15,19 @@ metadata {
      }
  	tiles {
  		valueTile("Value1", "device.Value1", width: 3, height: 1, canChangeBackground: true) {
- 			state "default", label:'${currentValue}',backgroundColor: "#00A0DC"
+ 			state "default", label:'${currentValue}'
  		}
  		valueTile("Value2", "device.Value2", width: 3, height: 1) {
- 			state "default", label:'${currentValue}',backgroundColor: "#00A0DC"
+ 			state "default", label:'${currentValue}'
  		}
  		valueTile("Value3", "device.Value3", width: 3, height: 1) {
- 			state "default", label:'${currentValue}',backgroundColor: "#00A0DC"
+ 			state "default", label:'${currentValue}'
  		}
  		valueTile("Value4", "device.Value4", width: 3, height: 1) {
- 			state "default", label:'${currentValue}',backgroundColor: "#00A0DC"
+ 			state "default", label:'${currentValue}'
  		}
  		valueTile("Value5", "device.Value5", width: 3, height: 1) {
- 			state "default", label:'${currentValue}',backgroundColor: "#00A0DC"
+ 			state "default", label:'${currentValue}'
  		}
  		main(["Value1"])
  		details(["Value1","Value2","Value3","Value4","Value5"])
