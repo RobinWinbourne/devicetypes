@@ -1,0 +1,77 @@
+metadata {
+    definition (name: "webCoRE Value Ties - With Two Switches", namespace: "RobinWinbourne", author: "Robin Winbourne") {
+        capability "Actuator"
+        capability "Switch"
+
+        attribute "switch2","string"
+        attribute "Value1","string"
+        attribute "Value2","string"
+        attribute "Value3","string"
+        attribute "Value4","string"
+        attribute "Value5","string"
+
+        command "on2"
+        command "off2"
+        command "changeValue1"
+        command "changeValue2"
+        command "changeValue3"
+        command "changeValue4"
+        command "changeValue5"
+    }
+    tiles (scale: 2){
+        standardTile("switch", "device.switch", width: 3, height: 3, decoration: "flat", inactiveLabel: false, canChangeIcon: false, canChangeBackground: true) {
+            state "on", label: "On", action: "switch.off", icon: "st.Home.home30", backgroundColor: "#66ccff"
+            state "off", label: "Off", action: "switch.on", icon: "st.Home.home30", backgroundColor: "#FFFFFF"
+        }
+
+        standardTile("switch2", "device.switch2", width: 3, height: 3, decoration: "flat", inactiveLabel: false) {
+            state "on", label: "On", action: "off2", icon: "st.Home.home30", backgroundColor: "#66ccff"
+            state "off", label: "Off", action: "on2", icon: "st.Home.home30", backgroundColor: "#FFFFFF"
+        }
+        valueTile("Value1", "device.Value1", width: 6, height: 2) {
+            state "default", label:'${currentValue}'
+        }
+        valueTile("Value2", "device.Value2", width: 6, height: 2) {
+            state "default", label:'${currentValue}'
+        }
+        valueTile("Value3", "device.Value3", width: 6, height: 2) {
+            state "default", label:'${currentValue}'
+        }
+        valueTile("Value4", "device.Value4", width: 6, height: 2) {
+            state "default", label:'${currentValue}'
+        }
+        valueTile("Value5", "device.Value5", width: 6, height: 2) {
+            state "default", label:'${currentValue}'
+        }
+        main(["switch"])
+        details(["switch","switch2","Value1","Value2","Value3","Value4","Value5"])
+    }
+}
+
+def on() {
+    sendEvent(name: "switch", value: "on")
+}
+def off() {
+    sendEvent(name: "switch", value: "off")
+}
+def on2() {
+    sendEvent(name: "switch2", value: "on")
+}
+def off2() {
+    sendEvent(name: "switch2", value: "off")
+}
+def changeValue1 (param1) {
+    sendEvent("name":"Value1", "value":param1)
+}
+def changeValue2 (param2) {
+    sendEvent("name":"Value2", "value":param2)
+}
+def changeValue3 (param3) {
+    sendEvent("name":"Value3", "value":param3)
+}
+def changeValue4 (param4) {
+    sendEvent("name":"Value4", "value":param4)
+}
+def changeValue5 (param5) {
+    sendEvent("name":"Value5", "value":param5)
+}
